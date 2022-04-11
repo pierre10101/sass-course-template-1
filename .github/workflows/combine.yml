@@ -73,7 +73,7 @@ jobs:
                     statusOK = false;
                   }
                 }
-                if (statusOK && pull['labels'].contains('dependabot')) {
+                if (statusOK) {
                   console.log('Adding branch to array: ' + branch);
                   branches.push(branch);
                   prs.push('#' + pull['number'] + ' ' + pull['title']);
