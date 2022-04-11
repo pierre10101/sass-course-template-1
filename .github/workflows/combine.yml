@@ -97,28 +97,6 @@ jobs:
       - uses: actions/checkout@v2.3.3
         with:
           fetch-depth: 0
-      # Creates a branch with other PR branches merged together
-      - name: Created combined branch
-        env:
-          BASE_BRANCH: ${{ steps.fetch-branch-names.outputs.base-branch }}
-          BRANCHES_TO_COMBINE: ${{ steps.fetch-branch-names.outputs.result }}
-          COMBINE_BRANCH_NAME: ${{ github.event.inputs.combineBranchName }}
-        run: |
-          echo "$BRANCHES_TO_COMBINE"
-          sourcebranches="${BRANCHES_TO_COMBINE%\"}"
-          sourcebranches="${sourcebranches#\"}"
-          
-          basebranch="${BASE_BRANCH%\"}"
-          basebranch="${basebranch#\"}"
-          
-          git config pull.rebase false
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          
-          git checkout master
-          git checkout -b combine-pr-branch
-          git fetch origin $sourcebranches 
-      # Creates a PR with the new combined branch
       - uses: actions/github-script@v3
         name: Create Combined Pull Request
         env:
