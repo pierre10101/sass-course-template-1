@@ -117,7 +117,7 @@ jobs:
           
           git branch $COMBINE_BRANCH_NAME $basebranch
           git checkout $COMBINE_BRANCH_NAME
-          git fetch origin $sourcebranches
+          git request-pull v1.0 $sourcebranches $basebranch
           git push origin $COMBINE_BRANCH_NAME
       # Creates a PR with the new combined branch
       - uses: actions/github-script@v3
