@@ -117,7 +117,7 @@ jobs:
           
           git branch $COMBINE_BRANCH_NAME $basebranch
           git checkout $COMBINE_BRANCH_NAME
-          git merge --no-commit --no-ff $sourcebranches
+          git pull origin $sourcebranches --no-edit --no-commit --no-ff
           git push origin $COMBINE_BRANCH_NAME
       # Creates a PR with the new combined branch
       - uses: actions/github-script@v3
