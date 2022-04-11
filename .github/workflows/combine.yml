@@ -36,10 +36,9 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            const pulls = await github.paginate('GET /repos/:owner/:repo/pulls', {
+            const pulls = await github.paginate('GET /repos/:owner/:repo/pulls?head=user:dependabot', {
               owner: context.repo.owner,
-              repo: context.repo.repo,
-              author: app/dependabot
+              repo: context.repo.repo
             });
             branches = [];
             prs = [];
