@@ -36,7 +36,7 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            const pulls = await github.paginate('GET /repos/:owner/:repo/pulls?head=user:dependabot', {
+            const pulls = await github.paginate('GET /repos/:owner/:repo/pulls', {
               owner: context.repo.owner,
               repo: context.repo.repo
             });
@@ -73,7 +73,7 @@ jobs:
                     statusOK = false;
                   }
                 }
-                if (statusOK) {
+                if (statusOK && pull['labels'].contains('dependabot')) {
                   console.log('Adding branch to array: ' + branch);
                   branches.push(branch);
                   prs.push('#' + pull['number'] + ' ' + pull['title']);
